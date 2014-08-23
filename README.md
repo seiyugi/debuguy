@@ -49,4 +49,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## License
 
 Copyright (c) 2014 seiyugi  
-Licensed under the MIT license.
+Licensed under the MPL license.
