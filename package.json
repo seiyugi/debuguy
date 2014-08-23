@@ -1,0 +1,44 @@
+{
+  "name": "debuguy",
+  "version": "0.0.0",
+  "main": "lib/debuguy.js",
+  "description": "An unintrusive log analysis/debugging/profiling framework",
+  
+      "homepage": "https://github.com/seiyugi/debuguy",
+    
+    "bugs": "https://github.com/seiyugi/debuguy/issues",
+  "author": {
+    "name": "seiyugi",
+    "email": "" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seiyugi/debuguy"
+  },
+  "license": "MPL",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "debuguy"  ,
+        "" 
+  ],
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1",
+    "grunt-mocha-cli": "^1.9.0",
+    "jshint-stylish": "^0.2.0"  ,
+        "browserify": "^4.1.3" 
+  },
+  "scripts": {
+    "test": "grunt"  ,
+        "browser": "browserify lib/debuguy.js > browser.js" 
+  }  ,
+      "bin": {
+        "debuguy": "cli.js"
+    },
+    "preferGlobal": "true" 
+}
