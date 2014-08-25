@@ -1,6 +1,7 @@
 'use strict';
 
-var debuguy = require('../lib/debuguy.js');
+function runDebuguy() {
+  /* debuguy: tag('hello world') */
+}
 
-debuguy.awesome();
-// => awesome
+runDebuguy();
