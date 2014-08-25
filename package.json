@@ -16,7 +16,7 @@
     "url": "https://github.com/seiyugi/debuguy"
   },
   "license": "MPL",
-  "files": [
+  "directories": [
     "lib"
   ],
   "keywords": [
