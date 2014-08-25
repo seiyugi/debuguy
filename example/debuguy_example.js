@@ -1,7 +1,7 @@
 'use strict';
 
 function runDebuguy() {
-  /* debuguy: tag('hello world') */
+  /* debuguy: tag('A') */
 }
 
 runDebuguy();
