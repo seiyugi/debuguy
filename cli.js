@@ -5,9 +5,9 @@
 var debuguy = require('./lib/debuguy');
 
 var userArgs = process.argv;
-var searchParam = userArgs[2];
+var dir = userArgs[3];
 
-if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1 || searchParam === undefined) {
+if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1 || dir === undefined) {
     return console.log('cli help');
 }
 
@@ -30,4 +30,7 @@ if (userArgs[2] === 'reporter') {
     reporter.analyzeBuffer(buffer, '\n');
     reporter.stop();
   });
+} else if (userArgs[2] === 'parse') {
+  var out = userArgs[4];
+  debuguy.parse(dir, out);
 }
