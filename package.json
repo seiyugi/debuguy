@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "main": "lib/debuguy.js",
   "description": "An unintrusive log analysis/debugging/profiling framework",
-
   "homepage": "https://github.com/seiyugi/debuguy",
-
   "bugs": "https://github.com/seiyugi/debuguy/issues",
   "author": {
     "name": "seiyugi",
@@ -39,5 +37,9 @@
   "bin": {
     "debuguy": "./cli.js"
   },
-  "preferGlobal": "true"
+  "preferGlobal": "true",
+  "dependencies": {
+    "express": "^4.8.5",
+    "ws": "^0.4.32"
+  }
 }

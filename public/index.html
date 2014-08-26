@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>node server test</title>
+</head>
+
+<body>
+    hi
+    <script>
+    var exampleSocket = new WebSocket("ws://127.0.0.1:8080");
+    exampleSocket.onopen = function(event) {
+      exampleSocket.send("on open!");
+    };
+    exampleSocket.onmessage = function(event) {
+      document.body.innerHTML = event.data;
+      console.log(event.data);
+    }
+    </script>
+</body>
+
+</html>
