@@ -18,26 +18,22 @@ if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
 
 if (userArgs[2] === 'profile') {
 
+  // web and websocket server
+  server.start();
+
   var reporter = new (require('./lib/reporter.js').Reporter)();
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   var buffer = '';
-  var lines = [];
-  reporter.start();
+  reporter.start(server);
   process.stdin.on('data', function(chunk) {
     buffer = reporter.analyzeBuffer(buffer, chunk);
-    lines.push(buffer);
   });
 
   process.stdin.on('end', function() {
     reporter.analyzeBuffer(buffer, '\n');
-    lines.push(buffer);
     reporter.stop();
-    server.broadcast(lines.join('\n'));
   });
-
-  // web and websocket server
-  server.start();
 
 } else if (userArgs[2] === 'parse' && dir !== undefined) {
   var out = userArgs[4];
