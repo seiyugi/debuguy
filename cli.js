@@ -1,14 +1,27 @@
 #! /usr/bin/env node
 
+/**
+ * Parsing:
+ *
+ * $ debuguy parse <source_dir>
+ * $ debuguy parse <source_dir> <destination_dir>
+ * $ debuguy parse -r <source_dir>
+ * $ debuguy parse -r <source_dir> <destination_dir>
+ *
+ * Profiling:
+ *
+ * $ <stream> | debuguy profile
+ *
+ */
+
 'use strict';
 
 var DOCUMENT_ROOT = __dirname + '/public';
 
-var debuguy = require('./lib/debuguy');
+var parser = require('./lib/parser');
 var server = require('./lib/server');
 
 var userArgs = process.argv;
-var dir = userArgs[3];
 
 var options = {
   profile: {
@@ -70,7 +83,27 @@ if (userArgs[2] === options.profile.name) {
     reporter.stop();
   });
 
-} else if (userArgs[2] === options.parse.name && dir !== undefined) {
-  var out = userArgs[4];
-  debuguy.parse(dir, out);
+} else if (userArgs[2] === options.parse.name) {
+
+  var parseOption;
+
+  if (userArgs.indexOf('-r') !== -1 && userArgs[4] !== undefined) {
+    parseOption = {
+      source: userArgs[4],
+      destination: userArgs[5],
+      recursive: true
+    };
+  } else if (userArgs[3] !== undefined) {
+    parseOption = {
+      source: userArgs[3],
+      destination: userArgs[4]
+    };
+  } else {
+    console.log('No source directory specified');
+  }
+
+  if (parseOption) {
+    parser.parse(parseOption);
+  }
+
 }
