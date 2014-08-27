@@ -1,8 +1,8 @@
 {
   "name": "debuguy",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "lib/debuguy.js",
-  "description": "An unintrusive log analysis/debugging/profiling framework",
+  "description": "An unintrusive log analysis/debugging/profiling tool",
   "homepage": "https://github.com/seiyugi/debuguy",
   "bugs": "https://github.com/seiyugi/debuguy/issues",
   "author": {
