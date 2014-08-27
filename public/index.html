@@ -51,6 +51,11 @@
                   .size([width, height])
                   .on('tick', tick);
 
+      this.nodeDrag = d3.behavior.drag()
+                      .on('dragstart', dragStart)
+                      .on('drag', dragMove)
+                      .on('dragend', dragStop);
+
       function tick() {
         var node = self.svg.selectAll('.node');
         var link = self.svg.selectAll('.link');
@@ -66,6 +71,24 @@
           return 'M' + d.source.x + ',' + d.source.y +
             'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y;
         });
+      }
+
+      function dragStart(d, i) {
+        self.force.stop();
+      }
+
+      function dragMove(d, i) {
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy;
+        tick();
+      }
+
+      function dragStop(d, i) {
+        d.fixed = true;
+        tick();
+        self.force.resume();
       }
     };
 
@@ -124,7 +147,7 @@
       group.append('circle')
           .attr('class', function(d) { return d.id; })
           .attr('r', 8)
-          .call(this.force.drag);
+          .call(this.nodeDrag);
       group.append('text')
           .attr('x', '15px')
           .attr('y', '10px')
