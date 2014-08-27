@@ -8,15 +8,48 @@ var server = require('./lib/server');
 var userArgs = process.argv;
 var dir = userArgs[3];
 
-if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1) {
-    return console.log('debuguy help');
+var options = {
+  profile: {
+    name: 'profile',
+    usage: '',
+    description: 'launch debuguy local profiling report server'
+  },
+  parse: {
+    name: 'parse',
+    usage: '[source_dir] [[destination_dir]]',
+    description: 'parse javascript from [source_dir] and ' +
+      'replace debuguy comments with console.log into ' +
+      '[destination_dir]'
+  }
+};
+
+var displayHelpMenu = function() {
+  var outputMessage = '';
+  var version = require('./package').version;
+  outputMessage += 'debuguy: An unintrusive JavaScript ' +
+    'debugging/profiling/log generating tool (' + version + ')';
+  outputMessage += '\n\nUsage: ';
+  Object.keys(options).forEach(function(key) {
+    var option = options[key];
+    outputMessage += '\n  debuguy ' + option.name +
+      ' ' + option.usage;
+    if (option.description) {
+      outputMessage += '\n    ' + option.description + '\n';
+    }
+  });
+  return console.log(outputMessage);
+};
+
+if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1
+  || userArgs.length < 3) {
+    return displayHelpMenu();
 }
 
 if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
     return console.log(require('./package').version);
 }
 
-if (userArgs[2] === 'profile') {
+if (userArgs[2] === options.profile.name) {
 
   // web and websocket server
   server.start();
@@ -35,7 +68,7 @@ if (userArgs[2] === 'profile') {
     reporter.stop();
   });
 
-} else if (userArgs[2] === 'parse' && dir !== undefined) {
+} else if (userArgs[2] === options.parse.name && dir !== undefined) {
   var out = userArgs[4];
   debuguy.parse(dir, out);
 }
