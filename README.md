@@ -35,34 +35,13 @@ $ adb logcat | debuguy profile
 # creates a browser.js
 $ grunt browserify
 ```
-
-### If you want to contribute debuguy
-
-Fork and clone [https://github.com/seiyugi/debuguy.git](https://github.com/seiyugi/debuguy.git)
-
-Install dependency
-
-```sh
-$ npm install
-```
-
-Run grunt
-
-```sh
-$ grunt
-```
-
-If nothing breaks, then you are good. :+1:
-
-It's time to hack! :neckbeard:
-
 ## Documentation
 
 At build time debuguy parses comments of a predefined format and replace them with console.log expressions. These console.log are passed to a HTML reporter at run time to generate an activity diagram.
 
 The comment format to be specified in javascript source file is:
 ```js
-/* debuguy: tab('<TAG_NAME>') */
+/* debuguy: tag('<TAG_NAME>') */
 ```
 The <TAG_NAME> is a customizable tag that you'd like to mark any specific checkpoint in your javascript source code. It could be either ```taskA``` or ```taskA.childA```, the debuguy reporter will generate the report according to the hierachy of the tags.
 
@@ -90,13 +69,26 @@ Launch report:
 ```sh
 $ adb logcat | debuguy profile
 ```
-
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
 
+Fork and clone [https://github.com/seiyugi/debuguy.git](https://github.com/seiyugi/debuguy.git)
+
 1. Fork ```debuguy``` repository.
 2. ```sh $ git clone ssh://github.com/<YOUR_NAME>/debuguy```
+
+Install dependency
+
+```sh
+$ npm install
+```
+
+Run grunt
+
+```sh
+$ grunt
+```
 
 In the local folder, you can run your local debuguy with
 ```sh
@@ -104,8 +96,11 @@ $ ./cli.js parse ./srouce_dir
 ```
 Or, in the local folder, run ```sh $ npm install -g .``` to install debugy with your local copy.
 
+If nothing breaks, then you are good. :+1:
+
+It's time to hack! :neckbeard:
 
 ## License
 
-Copyright (c) 2014 seiyugi
+Copyright &copy; 2014 seiyugi
 Licensed under the MPL license.
