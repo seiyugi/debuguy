@@ -11,6 +11,8 @@ TBC
 
 ## Getting Started
 
+### If you want to use debuguy right away
+
 Install with cli command
 
 ```sh
@@ -33,6 +35,26 @@ $ adb logcat | debuguy profile
 # creates a browser.js
 $ grunt browserify
 ```
+
+### If you want to contribute debuguy
+
+Fork and clone [https://github.com/seiyugi/debuguy.git](https://github.com/seiyugi/debuguy.git)
+
+Install dependency
+
+```sh
+$ npm install
+```
+
+Run grunt
+
+```sh
+$ grunt
+```
+
+If nothing breaks, then you are good. :+1:
+
+It's time to hack! :neckbeard:
 
 ## Documentation
 
@@ -85,5 +107,5 @@ Or, in the local folder, run ```sh $ npm install -g .``` to install debugy with 
 
 ## License
 
-Copyright (c) 2014 seiyugi  
+Copyright (c) 2014 seiyugi
 Licensed under the MPL license.
