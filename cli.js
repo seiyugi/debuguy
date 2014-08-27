@@ -2,6 +2,8 @@
 
 'use strict';
 
+var DOCUMENT_ROOT = __dirname + '/public';
+
 var debuguy = require('./lib/debuguy');
 var server = require('./lib/server');
 
@@ -52,7 +54,7 @@ if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
 if (userArgs[2] === options.profile.name) {
 
   // web and websocket server
-  server.start();
+  server.start({ documentRoot: DOCUMENT_ROOT});
 
   var reporter = new (require('./lib/reporter.js').Reporter)();
   process.stdin.resume();
