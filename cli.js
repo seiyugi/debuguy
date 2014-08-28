@@ -35,6 +35,11 @@ var options = {
     description: 'parse javascript from [source_dir] and ' +
       'replace debuguy comments with console.log into ' +
       '[destination_dir]'
+  },
+  autolog: {
+    name: 'autolog',
+    usage: '[source_dir] [[destination_dir]]',
+    description: 'parse all functions and auto add console log for debuguy'
   }
 };
 
@@ -106,4 +111,25 @@ if (userArgs[2] === options.profile.name) {
     parser.parse(parseOption);
   }
 
+} else if (userArgs[2] === options.autolog.name) {
+  var parseOption;
+
+  if (userArgs.indexOf('-r') !== -1 && userArgs[4] !== undefined) {
+    parseOption = {
+      source: userArgs[4],
+      destination: userArgs[5],
+      recursive: true
+    };
+  } else if (userArgs[3] !== undefined) {
+    parseOption = {
+      source: userArgs[3],
+      destination: userArgs[4]
+    };
+  } else {
+    console.log('No source directory specified');
+  }
+
+  if (parseOption) {
+    parser.autolog(parseOption);
+  }
 }
