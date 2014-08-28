@@ -11,8 +11,14 @@ var testFn = {
 
 	stop: function _stop() {
 
+	},
+
+	main: function() {
+
 	}
 }
 
 runDebuguy();
-runDebuguy3();
+testFn.init();
+testFn.stop();
+testFn.main();
