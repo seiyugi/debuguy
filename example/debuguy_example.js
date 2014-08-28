@@ -15,4 +15,5 @@ var testFn = {
 }
 
 runDebuguy();
-runDebuguy3();
+testFn.init();
+testFn.stop();
