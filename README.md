@@ -94,6 +94,12 @@ In the local folder, you can run your local debuguy with
 ```sh
 $ ./cli.js parse ./srouce_dir
 ```
+
+Automatically add console.log after each functions
+```sh
+$ ./cli.js autolog ./srouce_dir
+```
+
 Or, in the local folder, run ```sh $ npm install -g .``` to install debugy with your local copy.
 
 If nothing breaks, then you are good. :+1:
