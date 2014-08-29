@@ -1,7 +1,7 @@
 'use strict';
 function runDebuguy() {
-/* debuguy: tag('A') */
-var abc;
+	var abc = 'CCC';
+	/* debuguy: tag('A', abc) */
 }
 
 var testFn = {
