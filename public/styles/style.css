@@ -1,0 +1,66 @@
+/* global */
+
+body {
+  box-sizing: border-box;
+}
+
+/* layout */
+
+body > div {
+  float: left;
+}
+
+/* console */
+
+#console {
+  color: white;
+  background-color: black;
+  opacity: 0.8;
+  position: relative;
+  height: 100vh;
+  overflow: auto;
+}
+
+#log-list > li {
+  margin: 1rem;
+  width: 28rem;
+}
+
+#log-list .log-item .log-time {
+  display: inline-block;
+  width: 7rem;
+}
+
+#log-list .log-item .log-tag {
+  display: inline-block;
+  width: 20rem;
+}
+
+/* ExecutionGraph */
+
+svg {
+  width: auto;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.node.a { fill: #1f77b4; }
+.node.b { fill: #ff7f0e; }
+.node.c { fill: #2ca02c; }
+
+text {
+  fill: #000;
+  stroke: none;
+  font-size: 16px;
+  pointer-events: none;
+}
