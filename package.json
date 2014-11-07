@@ -39,8 +39,8 @@
   },
   "preferGlobal": "true",
   "dependencies": {
+    "esprima": "^1.2.2",
     "express": "^4.8.5",
-    "falafel": "^0.3.1",
     "open": "0.0.5",
     "ws": "^0.4.32"
   }
