@@ -1,6 +1,6 @@
 var exampleSocket = new WebSocket('ws://127.0.0.1:8080');
 
-var execGraph = new ExecutionGraph();
+var graph = new CodeFlowGraph(document.getElementById('demo'));
 
 var logList = document.querySelector('#log-list');
 
@@ -19,8 +19,11 @@ exampleSocket.onopen = function(event) {
 };
 
 exampleSocket.onmessage = function(event) {
+  // console.log(event.data);
+
   var data = JSON.parse(event.data);
-  execGraph.insertNode(data);
+
+  if (data.path[data.path.length-1].startsWith('anonymous')) { return; }
 
   var logItem = liTemplate.cloneNode();
   var timeItem = timeTemplate.cloneNode();
@@ -31,5 +34,7 @@ exampleSocket.onmessage = function(event) {
   logItem.appendChild(tagItem);
   logList.appendChild(logItem);
 
-  console.log(data);
+  graph.insertNode(data);
+
+  // console.log(data);
 };
