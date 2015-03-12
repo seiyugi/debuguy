@@ -2,12 +2,13 @@
 
 body {
   box-sizing: border-box;
+  font-size: 10px;
 }
 
 /* layout */
 
-body > div {
-  float: left;
+body {
+  display: flex;
 }
 
 /* console */
@@ -16,14 +17,24 @@ body > div {
   color: white;
   background-color: black;
   opacity: 0.8;
+  overflow: auto;
+}
+
+#console.left {
   position: relative;
   height: 100vh;
-  overflow: auto;
+  resize: horizontal;
+}
+
+#console.bottom {
+  position: relative;
+  height: 100vh;
+  resize: vertical;
 }
 
 #log-list > li {
   margin: 1rem;
-  width: 28rem;
+  width: 23rem;
 }
 
 #log-list .log-item .log-time {
@@ -33,12 +44,29 @@ body > div {
 
 #log-list .log-item .log-tag {
   display: inline-block;
-  width: 20rem;
+  width: 15rem;
+}
+
+/* SVG */
+#demo {
+  width: calc( 100% - 25rem );
+  height: 100vh;
+  overflow: hidden;
+}
+
+rect, ellipse {
+  stroke: black;
+  fill: white;
+}
+
+line {
+  stroke: black;
+  stroke-width: 1px;
 }
 
 /* ExecutionGraph */
 
-svg {
+/*svg {
   width: auto;
 }
 
@@ -63,4 +91,4 @@ text {
   stroke: none;
   font-size: 16px;
   pointer-events: none;
-}
+}*/
