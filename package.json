@@ -39,7 +39,7 @@
   },
   "preferGlobal": "true",
   "dependencies": {
-    "esprima": "^1.2.2",
+    "esprima": "^2.0.0",
     "express": "^4.8.5",
     "open": "0.0.5",
     "ws": "^0.4.32"
