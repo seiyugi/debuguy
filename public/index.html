@@ -9,6 +9,10 @@
 
 <body>
   <div id="console" class='left'>
+    <select id="graph-choices">
+      <option value="code-flow-graph">Code FLow</option>
+      <option value="execution-graph">Execution</option>
+    </select>
     <ul id="log-list">
       <li id="log-title" class="log-item">
         <div class="log-time">Timestamp</div>
@@ -18,10 +22,11 @@
   </div>
 
   <div id='demo'></div>
-<!--
+
   <script src='http://d3js.org/d3.v3.js'></script>
--->
+
   <script src='scripts/moment.js'></script>
+  <script src='scripts/execution_graph.js'></script>
   <script src='scripts/code_flow_graph.js'></script>
   <script src='scripts/main.js'></script>
 </body>

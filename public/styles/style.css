@@ -66,29 +66,29 @@ line {
 
 /* ExecutionGraph */
 
-/*svg {
+svg.execution-graph {
   width: auto;
 }
 
-.link {
+svg.execution-graph .link {
   fill: none;
   stroke: #000;
   stroke-width: 1.5px;
 }
 
-.node {
+svg.execution-graph .node {
   fill: #ccc;
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
-.node.a { fill: #1f77b4; }
-.node.b { fill: #ff7f0e; }
-.node.c { fill: #2ca02c; }
+svg.execution-graph .node.a { fill: #1f77b4; }
+svg.execution-graph .node.b { fill: #ff7f0e; }
+svg.execution-graph .node.c { fill: #2ca02c; }
 
-text {
+svg.execution-graph text {
   fill: #000;
   stroke: none;
   font-size: 16px;
   pointer-events: none;
-}*/
+}

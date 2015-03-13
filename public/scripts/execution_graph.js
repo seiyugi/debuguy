@@ -12,6 +12,7 @@ ExecutionGraph.prototype.init = function() {
   var self = this;
 
   this.svg = d3.select('#demo').append('svg')
+            .attr('class', 'execution-graph')
             .attr('width', width)
             .attr('height', height);
 
@@ -80,6 +81,7 @@ ExecutionGraph.prototype.init = function() {
 
 ExecutionGraph.prototype.insertNode = function(data) {
   var self = this;
+  data = JSON.parse(data);
 
   function pathToString(path) {
     return path.join('-');
@@ -141,4 +143,8 @@ ExecutionGraph.prototype.updateGraph = function() {
   node.exit().remove();
 
   this.force.start();
+};
+
+ExecutionGraph.prototype.clear = function () {
+  document.getElementById('demo').removeChild(document.querySelector('svg'));
 };

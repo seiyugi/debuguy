@@ -18,12 +18,15 @@ exampleSocket.onopen = function(event) {
   exampleSocket.send('websocket connection open!');
 };
 
+var dataCache = [];
+
 exampleSocket.onmessage = function(event) {
-  // console.log(event.data);
+  dataCache.push(event.data);
+  graph.insertNode(event.data);
 
   var data = JSON.parse(event.data);
 
-  if (data.path[data.path.length-1].startsWith('anonymous')) { return; }
+  // if (data.path[data.path.length-1].startsWith('anonymous')) { return; }
 
   var logItem = liTemplate.cloneNode();
   var timeItem = timeTemplate.cloneNode();
@@ -33,8 +36,24 @@ exampleSocket.onmessage = function(event) {
   logItem.appendChild(timeItem);
   logItem.appendChild(tagItem);
   logList.appendChild(logItem);
-
-  graph.insertNode(data);
-
-  // console.log(data);
 };
+
+var graphChoices = document.getElementById('graph-choices');
+
+graphChoices.addEventListener('change', function (e) {
+  console.log('select ', e.target.value);
+  graph.clear();
+
+  switch (e.target.value) {
+    case 'code-flow-graph':
+      graph = new CodeFlowGraph(document.getElementById('demo'));
+      break;
+    case 'execution-graph':
+      graph = new ExecutionGraph();
+      break;
+  }
+
+  dataCache.forEach(function (data) {
+    graph.insertNode(data);
+  });
+});

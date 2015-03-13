@@ -23,86 +23,78 @@ var CodeFlowGraph = function(container) {
 
   // var svgRect = self.svg.getBoundingClientRect();
   // var objRect = self.objectsContainer.getBoundingClientRect();
-  var funcRect;
-  var scrolling = false;
-  var scrollingStartTime;
-  var scrollTop = 0;
-  var originalScrollTop = 0;
-  var scrollLeft = 10;
-  var originalScrollLeft = 10;
-  container.addEventListener('wheel', function (e) {
-    scrolling = true;
-    scrollingStartTime = Date.now();
-    funcRect = self.functionsContainer.getBoundingClientRect();
+  this.funcRect = null;
+  this.scrolling = false;
+  this.scrollingStartTime = null;
+  this.scrollTop = 0;
+  this.originalScrollTop = 0;
+  this.scrollLeft = 10;
+  this.originalScrollLeft = 10;
 
-    if (funcRect.height > container.clientHeight) {
-      originalScrollTop = scrollTop;
-      scrollTop -= e.deltaY * 2;
-    }
+  container.addEventListener('wheel', this);
 
-    if (funcRect.width > container.clientWidth) {
-      originalScrollLeft = scrollLeft;
-      scrollLeft -= e.deltaX * 2;
-    }
-  });
-
+  this.animationRequest = null;
   var lastFrameTime = Date.now();
-  (function render() {
-    var now = Date.now();
-    var delta = now - lastFrameTime;
-    lastFrameTime = now;
+  function render(timestamp) {
+    var delta = timestamp - lastFrameTime;
+    lastFrameTime = timestamp;
 
-    if (scrolling) {
+    if (self.scrolling) {
       // do nothing while scrolling
-      if (Date.now() - scrollingStartTime > 300) {
-        scrolling = false;
+      if (Date.now() - self.scrollingStartTime > 300) {
+        self.scrolling = false;
       }
     } else {
       // snap to the edge
-      if (scrollTop > 0) {
-        originalScrollTop = scrollTop;
-        scrollTop -= delta;
-        scrollTop = scrollTop > 0 ? scrollTop : 0;
-      } else if (funcRect &&
-                 funcRect.height > container.clientHeight &&
-                 funcRect.height + scrollTop + 50 < container.clientHeight) {
-        originalScrollTop = scrollTop;
-        scrollTop += delta;
-        scrollTop = funcRect.height + scrollTop + 50 < container.clientHeight ? scrollTop : container.clientHeight - funcRect.height - 50;
+      if (self.scrollTop > 0) {
+        self.originalScrollTop = self.scrollTop;
+        self.scrollTop -= delta;
+        self.scrollTop = self.scrollTop > 0 ? self.scrollTop : 0;
+      } else if (self.funcRect &&
+                 self.funcRect.height > container.clientHeight &&
+                 self.funcRect.height + self.scrollTop + 50 < container.clientHeight) {
+        self.originalScrollTop = self.scrollTop;
+        self.scrollTop += delta;
+        self.scrollTop = self.funcRect.height + self.scrollTop + 50 < container.clientHeight ?
+                         self.scrollTop : container.clientHeight - self.funcRect.height - 50;
       }
 
-      if (scrollLeft > 10) {
-        originalScrollLeft = scrollLeft;
-        scrollLeft -= delta;
-        scrollLeft = scrollLeft > 10 ? scrollLeft : 10;
-      } else if (funcRect &&
-                 funcRect.height > container.clientHeight &&
-                 funcRect.height + scrollLeft - 200 < container.clientHeight) {
-        originalScrollLeft = scrollLeft;
-        scrollLeft += delta;
-        scrollLeft = funcRect.height + scrollLeft - 200 < container.clientHeight ? scrollLeft : container.clientHeight - funcRect.height + 200;
+      if (self.scrollLeft > 10) {
+        self.originalScrollLeft = self.scrollLeft;
+        self.scrollLeft -= delta;
+        self.scrollLeft = self.scrollLeft > 10 ? self.scrollLeft : 10;
+      } else if (self.funcRect &&
+                 self.funcRect.height > container.clientHeight &&
+                 self.funcRect.height + self.scrollLeft - 200 < container.clientHeight) {
+        self.originalScrollLeft = self.scrollLeft;
+        self.scrollLeft += delta;
+        self.scrollLeft = self.funcRect.height + self.scrollLeft - 200 < container.clientHeight ?
+                          self.scrollLeft : container.clientHeight - self.funcRect.height + 200;
       }
     }
 
-    if (scrollTop !== originalScrollTop || scrollLeft !== originalScrollLeft) {
-      self.objectsContainer.transform.baseVal.getItem(0).setTranslate(scrollLeft, 0);
-      self.functionsContainer.transform.baseVal.getItem(0).setTranslate(scrollLeft, scrollTop);
+    if (self.scrollTop !== self.originalScrollTop || self.scrollLeft !== self.originalScrollLeft) {
+      self.objectsContainer.transform.baseVal.getItem(0).setTranslate(self.scrollLeft, 0);
+      self.functionsContainer.transform.baseVal.getItem(0).setTranslate(self.scrollLeft, self.scrollTop);
     }
 
-    requestAnimationFrame(render);
-  })();
+    self.animationRequest = requestAnimationFrame(render);
+  }
+
+  this.animationRequest = requestAnimationFrame(render);
 };
 
 /**
  * Insert a node. Parse the node and call insertObject and insertFunction accordingly.
- * @param  {[type]} node [description]
+ * @param  {[type]} data [description]
  * @return {[type]}      [description]
  */
-CodeFlowGraph.prototype.insertNode = function CodeFlowGraph_insertNode (node) {
-  if (!node) {
+CodeFlowGraph.prototype.insertNode = function CodeFlowGraph_insertNode (data) {
+  if (!data) {
     return;
   }
 
+  var node = JSON.parse(data);
   this.nodes.push(node);
 
   var functionName = node.path.pop();
@@ -222,8 +214,29 @@ CodeFlowGraph.prototype.update = function CodeFlowGraph_update () {
 };
 
 /**
+ * Handle wheel event
+ */
+CodeFlowGraph.prototype.handleEvent = function CodeFlowGraph_handleEvent (e) {
+  this.scrolling = true;
+  this.scrollingStartTime = Date.now();
+  this.funcRect = this.functionsContainer.getBoundingClientRect();
+
+  if (this.funcRect.height > this.container.clientHeight) {
+    this.originalScrollTop = this.scrollTop;
+    this.scrollTop -= e.deltaY * 2;
+  }
+
+  if (this.funcRect.width > this.container.clientWidth) {
+    this.originalScrollLeft = this.scrollLeft;
+    this.scrollLeft -= e.deltaX * 2;
+  }
+};
+
+/**
  * Clear the graph
  */
 CodeFlowGraph.prototype.clear = function CodeFlowGraph_clear () {
-
+  cancelAnimationFrame(this.animationRequest);
+  this.container.removeEventListener('wheel', this);
+  this.container.removeChild(this.svg);
 };
