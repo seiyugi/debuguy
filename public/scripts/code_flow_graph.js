@@ -21,20 +21,69 @@ var CodeFlowGraph = function(container) {
   this.svg.appendChild(this.objectsContainer);
   container.appendChild(this.svg);
 
+  // var svgRect = self.svg.getBoundingClientRect();
+  // var objRect = self.objectsContainer.getBoundingClientRect();
+  var funcRect;
+  var scrolling = false;
+  var scrollingStartTime;
   var scrollTop = 0;
   var originalScrollTop = 0;
   var scrollLeft = 10;
   var originalScrollLeft = 10;
   container.addEventListener('wheel', function (e) {
-    console.log('wheel event', e);
-    originalScrollTop = scrollTop;
-    originalScrollLeft = scrollLeft;
-    scrollTop -= e.deltaY * 2;
-    scrollLeft -= e.deltaX * 2;
+    scrolling = true;
+    scrollingStartTime = Date.now();
+    funcRect = self.functionsContainer.getBoundingClientRect();
+
+    if (funcRect.height > container.clientHeight) {
+      originalScrollTop = scrollTop;
+      scrollTop -= e.deltaY * 2;
+    }
+
+    if (funcRect.width > container.clientWidth) {
+      originalScrollLeft = scrollLeft;
+      scrollLeft -= e.deltaX * 2;
+    }
   });
 
+  var lastFrameTime = Date.now();
   (function render() {
-    // self.functionsContainer.setAttribute('transform', 'translate(10, ' + scrollTop + ')');
+    var now = Date.now();
+    var delta = now - lastFrameTime;
+    lastFrameTime = now;
+
+    if (scrolling) {
+      // do nothing while scrolling
+      if (Date.now() - scrollingStartTime > 300) {
+        scrolling = false;
+      }
+    } else {
+      // snap to the edge
+      if (scrollTop > 0) {
+        originalScrollTop = scrollTop;
+        scrollTop -= delta;
+        scrollTop = scrollTop > 0 ? scrollTop : 0;
+      } else if (funcRect &&
+                 funcRect.height > container.clientHeight &&
+                 funcRect.height + scrollTop + 50 < container.clientHeight) {
+        originalScrollTop = scrollTop;
+        scrollTop += delta;
+        scrollTop = funcRect.height + scrollTop + 50 < container.clientHeight ? scrollTop : container.clientHeight - funcRect.height - 50;
+      }
+
+      if (scrollLeft > 10) {
+        originalScrollLeft = scrollLeft;
+        scrollLeft -= delta;
+        scrollLeft = scrollLeft > 10 ? scrollLeft : 10;
+      } else if (funcRect &&
+                 funcRect.height > container.clientHeight &&
+                 funcRect.height + scrollLeft - 200 < container.clientHeight) {
+        originalScrollLeft = scrollLeft;
+        scrollLeft += delta;
+        scrollLeft = funcRect.height + scrollLeft - 200 < container.clientHeight ? scrollLeft : container.clientHeight - funcRect.height + 200;
+      }
+    }
+
     if (scrollTop !== originalScrollTop || scrollLeft !== originalScrollLeft) {
       self.objectsContainer.transform.baseVal.getItem(0).setTranslate(scrollLeft, 0);
       self.functionsContainer.transform.baseVal.getItem(0).setTranslate(scrollLeft, scrollTop);
