@@ -1,0 +1,27 @@
+.nodeDesc {
+  font-size: 12px;
+  padding: 3px;
+  font-family: monospace;
+  width: 300px;
+  border-left: black 1px solid;
+  border-bottom: black 1px solid;
+}
+
+.funcName {
+  font-weight: bold;
+}
+
+.stack {
+  margin-left: 15px;
+}
+
+#mainContainer {
+  overflow: scroll;
+  margin: 0px 10px;
+  height: 100%;
+}
+
+#mainContainer > div {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}

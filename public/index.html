@@ -7,12 +7,14 @@
   <link rel="stylesheet" type="text/css" href="styles/style.css"/>
   <link rel="stylesheet" type="text/css" href="graphs/code_flow_graph.css"/>
   <link rel="stylesheet" type="text/css" href="graphs/execution_graph.css"/>
+  <link rel="stylesheet" type="text/css" href="graphs/call_stack_graph.css"/>
 </head>
 
 <body>
   <div id="console" class='left'>
     <select id="graph-choices">
       <option value="code-flow-graph">Code FLow</option>
+      <option value="call-stack-graph">CallStack</option>
       <option value="execution-graph">Execution</option>
     </select>
     <ul id="log-list">
@@ -29,6 +31,7 @@
 
   <script src='graphs/execution_graph.js'></script>
   <script src='graphs/code_flow_graph.js'></script>
+  <script src='scripts/call_stack_graph.js'></script>
   <script src='scripts/moment.js'></script>
   <script src='scripts/main.js'></script>
 </body>
