@@ -1,7 +1,7 @@
 debuguy
 =======
 
-#  [![Build Status](https://secure.travis-ci.org/seiyugi/debuguy.png?branch=master)](http://travis-ci.org/seiyugi/debuguy)
+#  [![Build Status](https://secure.travis-ci.org/seiyugi/debuguy.png?branch=master)](https://travis-ci.org/seiyugi/debuguy.svg?branch=master)
 
 > An unintrusive log analysis/debugging/profiling tool
 
