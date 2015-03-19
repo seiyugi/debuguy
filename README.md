@@ -31,10 +31,6 @@ $ debuguy parse ./scripts ./debug
 $ adb logcat | debuguy profile
 ```
 
-```sh
-# creates a browser.js
-$ grunt browserify
-```
 ## Documentation
 
 At build time debuguy parses comments of a predefined format and replace them with console.log expressions. These console.log are passed to a HTML reporter at run time to generate an activity diagram.
@@ -71,7 +67,7 @@ $ adb logcat | debuguy profile
 ```
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Gulp](http://gulpjs.com/).
 
 Fork and clone [https://github.com/seiyugi/debuguy.git](https://github.com/seiyugi/debuguy.git)
 
@@ -84,10 +80,10 @@ Install dependency
 $ npm install
 ```
 
-Run grunt
+Run gulp
 
 ```sh
-$ grunt
+$ gulp
 ```
 
 In the local folder, you can run your local debuguy with
