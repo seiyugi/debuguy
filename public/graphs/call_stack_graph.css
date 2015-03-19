@@ -7,6 +7,15 @@
   border-bottom: black 1px solid;
 }
 
+.nodeDesc > .ts {
+  color: #ff8800;
+  margin-left: 10px;
+}
+
+.nodeDesc > .ts:after {
+  content: 'ms';
+}
+
 .funcName {
   font-weight: bold;
 }
