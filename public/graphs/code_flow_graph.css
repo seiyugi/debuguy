@@ -1,0 +1,9 @@
+rect, ellipse {
+  stroke: black;
+  fill: white;
+}
+
+line {
+  stroke: black;
+  stroke-width: 1px;
+}
