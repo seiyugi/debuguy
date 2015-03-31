@@ -22,7 +22,6 @@ CallStackGraph.prototype.insertNode = function CallStackGraph_insertNode (data) 
     var newNode = document.createElement('div');
     newNode.style.backgroundColor = 'rgb(0,' + ',0)';
     newNode.id = ('ID' + node.time + node.path[0] + node.path[1]).replace('@', '');
-    console.log(newNode.id);
     var newText = document.createElement('div');
     var funcNameSet = node.path[1].split('@');
     newText.innerHTML = '<span>' + node.path[0] + '</span>' +
@@ -47,10 +46,10 @@ CallStackGraph.prototype.insertNode = function CallStackGraph_insertNode (data) 
       var startNode = document.querySelector('#' + nodeId + ' > .nodeDesc > .ts');
       startNode.textContent = timeDiff;
     }else {
-      alert('ERROR: path/time misfit!');
+      console.error('ERROR: path/time misfit!');
     }
   } else {
-    alert('ERROR: type missing/invalid!');
+    console.error('ERROR: type missing/invalid!');
   }
 };
 
