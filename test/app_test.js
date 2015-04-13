@@ -129,10 +129,10 @@ describe('app', function() {
       function () {
         var sourceDir = 'some_random_directory';
         app.run({
-          _: ['parse'],
+          _: ['parse', sourceDir],
           // XXX: This is tricky. Because minimist treat first params after
           // -r as value of r. But it is actually sourceDir to us.
-          r: sourceDir
+          r: true
         });
         parserParseSpy.calledOnce.should.be.exactly(true);
         var params = parserParseSpy.getCall(0).args[0];
@@ -160,10 +160,10 @@ describe('app', function() {
       function () {
         var sourceDir = 'some_random_directory';
         app.run({
-          _: ['autolog'],
+          _: ['autolog', sourceDir],
           // XXX: This is tricky. Because minimist treat first params after
           // -r as value of r. But it is actually sourceDir to us.
-          r: sourceDir
+          r: true
         });
         parserAutologSpy.calledOnce.should.be.exactly(true);
         var params = parserAutologSpy.getCall(0).args[0];
@@ -171,6 +171,24 @@ describe('app', function() {
         params.source.should.equal(sourceDir);
         params.should.have.property('recursive');
         params.recursive.should.be.exactly(true);
+      }
+    );
+
+    it ('should call autolog with callStackGraph=true if "autolog" and "-c" specified',
+      function () {
+        var sourceDir = 'some_random_directory';
+        app.run({
+          _: ['autolog', sourceDir],
+          // XXX: This is tricky. Because minimist treat first params after
+          // -r as value of r. But it is actually sourceDir to us.
+          c: true
+        });
+        parserAutologSpy.calledOnce.should.be.exactly(true);
+        var params = parserAutologSpy.getCall(0).args[0];
+        params.should.have.property('source');
+        params.source.should.equal(sourceDir);
+        params.should.have.property('callStackGraph');
+        params.callStackGraph.should.be.exactly(true);
       }
     );
   });

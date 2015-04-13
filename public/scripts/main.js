@@ -48,6 +48,9 @@ graphChoices.addEventListener('change', function (e) {
     case 'code-flow-graph':
       graph = new CodeFlowGraph(document.getElementById('demo'));
       break;
+    case 'call-stack-graph':
+      graph = new CallStackGraph(document.getElementById('demo'));
+      break;
     case 'execution-graph':
       graph = new ExecutionGraph();
       break;
