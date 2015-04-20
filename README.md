@@ -88,15 +88,19 @@ $ gulp
 
 In the local folder, you can run your local debuguy with
 ```sh
-$ ./cli.js parse ./srouce_dir
+$ ./cli.js parse ./source_dir
 ```
 
 Automatically add console.log after each functions
 ```sh
-$ ./cli.js autolog ./srouce_dir
+$ ./cli.js autolog ./source_dir [-c]
 ```
 
 Or, in the local folder, run ```sh $ npm install -g .``` to install debugy with your local copy.
+
+The option argument "-c" will print an ending-log to indicate function-end, so this can help you to show a Call Stack graph,.
+
+After using -c argument, you can use profile feature to show a Call Stack graph.
 
 If nothing breaks, then you are good. :+1:
 
