@@ -38,5 +38,5 @@ gulp.task('watch', function() {
 
 gulp.task('hook', function () {
     return gulp.src('.pre-commit')
-        .pipe(symlink('.git/hooks/pre-commit', 'pre-commit'));
+        .pipe(symlink('.git/hooks/pre-commit', {force: true}));
 });
