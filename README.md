@@ -1,6 +1,8 @@
 debuguy
 =======
 
+[![Join the chat at https://gitter.im/seiyugi/debuguy](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/seiyugi/debuguy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 #  [![Build Status](https://travis-ci.org/seiyugi/debuguy.svg?branch=master)](https://travis-ci.org/seiyugi/debuguy)
 
 > An unintrusive log analysis/debugging/profiling tool
