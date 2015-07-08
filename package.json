@@ -1,6 +1,6 @@
 {
   "name": "debuguy",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": "lib/debuguy.js",
   "description": "An unintrusive log analysis/debugging/profiling tool",
   "homepage": "https://github.com/seiyugi/debuguy",
