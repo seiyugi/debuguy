@@ -1,6 +1,6 @@
 {
   "name": "debuguy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib/debuguy.js",
   "description": "An unintrusive log analysis/debugging/profiling tool",
   "homepage": "https://github.com/seiyugi/debuguy",
@@ -35,8 +35,7 @@
     "streamqueue": "^0.1.3"
   },
   "scripts": {
-    "test": "gulp unit-test",
-    "postinstall": "gulp hook"
+    "test": "gulp unit-test"
   },
   "bin": {
     "debuguy": "./cli.js"
